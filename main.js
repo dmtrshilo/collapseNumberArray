@@ -74,8 +74,12 @@ function genTestData() {
 }
 
 function runTest() {
-    genTestData().forEach(test => {
-        const res = profil(test)
-        console.log(`исходная строка: ${res.source}\nсжатая строка: ${res.serialized}\nкоэф сжатия: ${res.koef}`)
+    let sum = 0
+    const testData = genTestData()
+    testData.forEach(test => {
+        const {koef, serialized, source} = profil(test)
+        sum += koef
+        console.log(`исходная строка: ${source}\nсжатая строка: ${serialized}\nкоэф сжатия: ${koef}`)
     })
+    console.log(`усредненный коэф по тестам: ${sum / testData.length}`)
 }
